@@ -28,7 +28,7 @@ $sprite-front-height: 93.6em;
   }
 
   .face.valid{
-    @include vendor-prefix(box-shadow, 0 0 10px $color-valid);
+    @include vendor-prefix(box-shadow, 0 0 0px 1px $color-valid);
   }
 
 
@@ -44,17 +44,16 @@ $sprite-front-height: 93.6em;
   .cc-field{
 
     input{
-      border: none;
+      border: 0;
       outline: none;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: white;
       @include vendor-prefix(border-radius, 0px);
-      @include vendor-prefix(box-shadow, inset 1px 1px 1px 1px #ccc);
+      @include vendor-prefix(box-shadow, inset 0px 1px 2px rgba(0,0,0,0.2));
       @include vendor-prefix(transition, background-color 300ms ease);
     }
 
     input:focus{
-      outline: 3px auto $color-field-glow;
-      @include vendor-prefix(box-shadow, none);
+      @include vendor-prefix(box-shadow, 0 0 0 1px $color-field-glow);
     }
 
     &.filled.valid:not(.focus){
@@ -66,7 +65,7 @@ $sprite-front-height: 93.6em;
 
     &.filled:hover:not(.focus){
       input{
-        @include vendor-prefix(box-shadow, inset 1px 1px 1px 1px #ccc);
+        @include vendor-prefix(box-shadow, inset 0px 1px 2px rgba(0,0,0,0.2));
         background-color: rgba(255, 255, 255, 0.6);
       }
     }
