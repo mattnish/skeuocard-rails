@@ -23,6 +23,8 @@ $color-field-glow: #2d495d;
 $color-invalid: #DD5E51;
 $color-valid: #2f94c8;
 .bankAccWrap{
+  max-width: 400px;
+  margin: auto;
   .skeuocard.js {
     width: $cc-face-width;
     height: $cc-face-height;
@@ -110,10 +112,10 @@ $color-valid: #2f94c8;
       @include vendor-prefix(border-radius, 3.55em);
       @include vendor-prefix(transition, all 0.25s ease);
       p{
-        margin: 0.6em;
+        margin: 10px;
         font-family: $cc-label-family;
         color: #fff;
-        font-size: 1.0em;
+        font-size: 15px;
         line-height: 1.2em;
       }
       p strong{
@@ -138,17 +140,17 @@ $color-valid: #2f94c8;
       &.front{
         background-position: 10.05em 0.6em;
         p{
-          margin-right: 2.9em;
-          margin-left: 1.25em;
-          margin-top: 0.6em;
+          margin-right: 46px;
+          margin-left: 23px;
+          margin-top: 11px;
         }
       }
       &.back{
         background-position: 0.6em 0.6em;
         p{
-          margin-right: 1.25em;
-          margin-left: 2.9em;
-          margin-top: 0.6em;
+          margin-right: 10px;
+          margin-left: 50px;
+          margin-top: 11px;
         }
       }
     }
@@ -158,17 +160,17 @@ $color-valid: #2f94c8;
       &.front{
         background-position: 10.08em 0.7em;
         p{
-          margin-right: 2.9em;
-          margin-left: 1.25em;
-          margin-top: 0.6em;
+          margin-right: 50px;
+          margin-left: 20px;
+          margin-top: 11px;
         }
       }
       &.back{
         background-position: 0.6em 0.6em;
         p{
-          margin-right: 1.25em;
-          margin-left: 2.9em;
-          margin-top: 0.6em;
+          margin-right: 10px;
+          margin-left: 55px;
+          margin-top: 11px;
         }
       }
     }
