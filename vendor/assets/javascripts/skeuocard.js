@@ -828,7 +828,6 @@
     };
 
     SegmentedCardNumberInputView.prototype.setGroupings = function(groupings, dontFocus) {
-      console.log('dont', dontFocus);
       var groupEl, groupLength, _caretPosition, _currentField, _i, _len, _value;
       _currentField = this._getFocusedField();
       _value = this.getValue();
