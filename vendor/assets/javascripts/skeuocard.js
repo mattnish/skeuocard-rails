@@ -391,7 +391,7 @@
     */
 
 
-    Skeuocard.prototype._renderProduct = function(product) {
+    Skeuocard.prototype._renderProduct = function(product, dontFocus) {
       var destFace, fieldName, focused, view, viewEl, _ref, _ref1,
         _this = this;
       this._log("[_renderProduct]", "Rendering product:", product);
@@ -405,7 +405,7 @@
         this.el.container.addClass("issuer-" + product.attrs.issuerShortname);
       }
       this._setUnderlyingValue('type', (product != null ? product.attrs.companyShortname : void 0) || null);
-      this._inputViews.number.setGroupings((product != null ? product.attrs.cardNumberGrouping : void 0) || [this.options.genericPlaceholder.length]);
+      this._inputViews.number.setGroupings((product != null ? product.attrs.cardNumberGrouping : void 0) || [this.options.genericPlaceholder.length], dontFocus);
       if (product != null) {
         this._inputViews.exp.reconfigure({
           pattern: (product != null ? product.attrs.expirationFormat : void 0) || "MM/YY"
@@ -460,7 +460,7 @@
     };
 
     Skeuocard.prototype.render = function() {
-      this._renderProduct(this.product);
+      this._renderProduct(this.product, true);
       return this._renderValidation();
     };
 
@@ -827,7 +827,8 @@
       return offset + field[0].selectionEnd;
     };
 
-    SegmentedCardNumberInputView.prototype.setGroupings = function(groupings) {
+    SegmentedCardNumberInputView.prototype.setGroupings = function(groupings, dontFocus) {
+      console.log('dont', dontFocus);
       var groupEl, groupLength, _caretPosition, _currentField, _i, _len, _value;
       _currentField = this._getFocusedField();
       _value = this.getValue();
@@ -850,21 +851,21 @@
       }
       this.options.groupings = groupings;
       this.setValue(_value);
-      _currentField = this._focusFieldForValue([_caretPosition, _caretPosition]);
+      _currentField = this._focusFieldForValue([_caretPosition, _caretPosition], dontFocus);
       if ((_currentField != null) && _currentField[0].selectionEnd === _currentField[0].maxLength) {
         return this._focusField(_currentField.next(), 'start');
       }
     };
 
-    SegmentedCardNumberInputView.prototype._focusFieldForValue = function(place) {
+    SegmentedCardNumberInputView.prototype._focusFieldForValue = function(place, dontFocus) {
       var field, fieldOffset, fieldPosition, groupIndex, groupLength, value, _i, _lastStartPos, _len, _ref;
       value = this.getValue();
       if (place === 'start') {
         field = this.el.find('input').first();
-        this._focusField(field, place);
+        this._focusField(field, place, dontFocus);
       } else if (place === 'end') {
         field = this.el.find('input').last();
-        this._focusField(field, place);
+        this._focusField(field, place, dontFocus);
       } else {
         field = null;
         fieldOffset = null;
@@ -879,18 +880,20 @@
           _lastStartPos += groupLength;
         }
         if ((field != null) && (fieldPosition != null)) {
-          this._focusField(field, [fieldPosition, fieldPosition]);
+          this._focusField(field, [fieldPosition, fieldPosition], dontFocus);
         } else {
-          this._focusField(this.el.find('input'), 'end');
+          this._focusField(this.el.find('input'), 'end', dontFocus);
         }
       }
       return field;
     };
 
-    SegmentedCardNumberInputView.prototype._focusField = function(field, place) {
+    SegmentedCardNumberInputView.prototype._focusField = function(field, place, dontFocus) {
       var fieldLen;
       if (field.length !== 0) {
-        field[0].focus();
+        if (!dontFocus){
+          field[0].focus();  
+        }
         if ($(field[0]).is(':visible') && field[0] === document.activeElement) {
           if (place === 'start') {
             return field[0].setSelectionRange(0, 0);
